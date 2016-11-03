@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="webshop">
+    <head>
+       	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+		<script src="main.js"></script>
+ 								
+    </head>
+    <body>
+        <div ng-controller="loginCtrl">
+			<a ng-click="showLoginForm = !showLoginForm" href="#">Login</a>
+			<div class="loginForm" ng-show="showLoginForm">
+				<form novalidate>
+				    Username:<br />
+				    <input type="text" ng-model="user.username"><br />
+				    Password:<br />
+				    <input type="text" ng-model="user.password"><br />
+				    <br /><br />
+				    <button ng-click="login(user)">Login</button>
+			    </form>
+			</div>
+			<br/>
+			<br/>
+			<div>{{validateLogin}}</div>
+			<br/>
+			<br/>
+			<button ng-show="showLogoutBtn" ng-click="logout()">Log out</button> 
+		</div>
+		
+		<div ng-controller="productsCtrl">
+			<a href="#" ng-click="showProducts()">Show Products</a>
+			<div ng-show="showProductsTable">
+			<input type="text" ng-model="searchField"/>
+			<table>
+				<tr ng-repeat="item in products | filter:searchField">
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>	
+					<td>
+						<select ng-model="item.count">
+							<option value=1>1</option>
+							<option value=2>2</option>
+							<option value=3>3</option>
+							<option value=4>4</option>
+							<option value=5>5</option> 
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<button ng-click="buyProducts()">Buy</button>
+			<br/>
+			<br/>
+			<div ng-show="showShoppingCart">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td>Price</td>
+					<td>Count</td>
+					<td>Subtotal</td>
+				</tr>
+				<tr ng-repeat="item in shoppingCart">
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td>{{item.count}}</td>
+					<td>{{item.price * item.count}}</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			Total: {{total}}
+			<br/>
+			<br/>
+			Name:
+			<input type="text" ng-model="user.name"/>
+			Surname:
+			<input type="text" ng-model="user.surname"/>
+			Card No:
+			<input type="text" ng-model="user.card_no"/>
+			<br/>
+			<br/>
+			<button ng-click="submitTransaction()">Submit</button>
+			<div ng-model="submitForm"></div>
+			</div>
+			</div>
+		</div>
+		
+    </body>
+</html>
